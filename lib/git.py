@@ -74,6 +74,8 @@ def clone_from_list(name):
         return
     page = request_data("%s%s" % (target.TARGET_GIT_URL, name))
     files = re.findall('<a href="(.+?)"', page, re.M | re.I)
+    if files[0][0] == "?": # ?C=N;O=D
+        files = files[5:]
     for f in files:
         if "../" == f:
             continue
